@@ -3,10 +3,12 @@ import json
 
 print("hallo")
 
+
 class Entity:
 
-    def __init__(self, name):
+    def __init__(self, name, attributes):
         self.name = name
+        self.attributes = attributes
 
 
 class Relation:
@@ -21,8 +23,18 @@ class Relation:
 
 
 # die JSON-Daten zu SQL konvertieren
-def json_to_sql():
+def json_to_sql(entities, relations):
     sql_commands = ["CREATE DATABASE codenight;"]
+    for entity in entities:
+        sql_commands += f"CREATE TABLE {entity}"
+        sql_commands += "("
+        for attribute in entity.attributes:
+            sql_commands += f"{attribute.name} {attribute.type},"
+        # dirty lol, das letzte unnötige Komma entfernen
+        sql_commands[-1] = sql_commands[-1][:-1]
+
+        # options and stuff
+        sql_commands += ");"
 
 
 # aus dem SQL die Datenbank erstellen (also Anfragen an das DBMS senden, damit dieses die Datenbank erstellt)
