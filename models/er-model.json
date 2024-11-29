@@ -12,16 +12,17 @@
         {
           "name": "studentennummer",
           "type": "int",
-          "is-primary-key": true
+          "is-primary-key": true,
+          "belegung":[1,2,3,4]
         },
         {
           "name": "telefonnummer",
           "type": "string",
-          "is-primary-key": false
+          "is-primary-key": false,
+          "belegung":[123,234,345,456]
         }
       ]
     },
-
     {
       "name": "berater",
       "relations": [
@@ -34,12 +35,14 @@
         {
           "name": "beraternummer",
           "type": "int",
-          "is-primary-key": true
+          "is-primary-key": true,
+          "belegung":[1]
         },
         {
           "name": "telefonnummer",
           "type": "string",
-          "is-primary-key": false
+          "is-primary-key": false,
+          "belegung":[789]
         }
       ]
     }
