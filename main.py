@@ -1,6 +1,8 @@
 import json
 
 
+print("hallo")
+
 class Entity:
 
     def __init__(self, name):
