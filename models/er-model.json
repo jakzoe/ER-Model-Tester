@@ -1,0 +1,47 @@
+{
+  "entities": [
+    {
+      "name": "student",
+      "relations": [
+        {
+          "name": "berät",
+          "cardinality": "1"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "studentennummer",
+          "type": "int",
+          "is-primary-key": true
+        },
+        {
+          "name": "telefonnummer",
+          "type": "string",
+          "is-primary-key": false
+        }
+      ]
+    },
+
+    {
+      "name": "berater",
+      "relations": [
+        {
+          "name": "berät",
+          "cardinality": "n"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "beraternummer",
+          "type": "int",
+          "is-primary-key": true
+        },
+        {
+          "name": "telefonnummer",
+          "type": "string",
+          "is-primary-key": false
+        }
+      ]
+    }
+  ]
+}
