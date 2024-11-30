@@ -129,17 +129,17 @@ def py_to_sql(entities, relations):
             sql_command.append(f"CREATE TABLE {entity.name}_{relation_entity.name}")
             sql_command.append("(")
 
-            sql_command.append(f"{entity.primary_key_name} {entity.primary_key_type},")
+            sql_command.append(f"{primary_name} {primary_type},")
             sql_command.append(f"{relation_primary_name} {relation_primary_type},")
 
             sql_command.append(
-                (f"PRIMARY KEY ({entity.primary_key_name}, {relation_primary_name}),")
+                (f"PRIMARY KEY ({primary_name}, {relation_primary_name}),")
             )
             sql_command.append(
-                f"FOREIGN KEY ({entity.primary_key_name}) REFERENCES {entity.table_name}({entity.primary_key_name}),"
+                f"FOREIGN KEY ({primary_name}) REFERENCES {entity.name}({primary_name}),"
             )
-            sql_command.append(
-                f"FOREIGN KEY ({relation_primary_name}) REFERENCES {relation_entity.table_name}({relation_primary_name}),"
+            post_sql_commands.append(
+                f"ALTER TABLE {entity.name} FOREIGN KEY ({relation_primary_name}) REFERENCES {relation_entity.name}({relation_primary_name});"
             )
 
             sql_command[-1] = sql_command[-1][:-1]
@@ -193,7 +193,7 @@ def json_to_py(json):
 
 
 # öffnet die Datei im Lese-Modus
-with open("models/er-model.json", "r", encoding="utf-8") as file:
+with open("models/er-model-v2.json", "r", encoding="utf-8") as file:
     er_model = json.load(file)
     print(er_model)
     entities, relations = json_to_py(er_model)
