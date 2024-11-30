@@ -27,7 +27,7 @@
       "name": "entliehene_Buecher",
       "relations": [
         {
-          "name": "entleit",
+          "name": "entleiht",
           "cardinality": "1"
         }
       ],

@@ -5,7 +5,7 @@
       "relations": [
         {
           "name": "wohnt",
-          "cardinality": "n"
+          "cardinality": "1"
         }
       ],
       "attributes": [
@@ -28,7 +28,7 @@
       "relations": [
         {
           "name": "wohnt",
-          "cardinality": "1"
+          "cardinality": "n"
         }
       ],
       "attributes": [
