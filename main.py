@@ -112,14 +112,18 @@ def py_to_sql(entities, relations):
                     f"{relation_primary_name} {relation_primary_type} {'UNIQUE' if is_one_to_one(entity, relations) else ''},"
                 )
                 post_sql_commands.append(
-                    f"ALTER TABLE {entity.name} FOREIGN KEY ({relation_primary_name}) REFERENCES {relation_entity.name}({relation_primary_name});"
+                    f"ALTER TABLE {entity.name} ADD CONSTRAINT fk_{relation_primary_name} FOREIGN KEY ({relation_primary_name}) REFERENCES {relation_entity.name}({relation_primary_name});"
                 )
             elif is_n_to_one(entity, relations):
-                new_relation_right.append([relation_entity.name, entity.name, primary_name])
+                new_relation_right.append(
+                    [relation_entity.name, entity.name, primary_name]
+                )
 
         for existing_relation in new_relation_right:
             if entity.name == existing_relation[0]:
-                sql_command.append(f"FOREIGN KEY ({existing_relation[2]}) REFERENCES {existing_relation[1]}({existing_relation[2]}),")
+                sql_command.append(
+                    f"FOREIGN KEY ({existing_relation[2]}) REFERENCES {existing_relation[1]}({existing_relation[2]}),"
+                )
                 new_relation_right.remove(existing_relation)
 
         # dirty lol, das letzte unnötige Komma entfernen
@@ -144,8 +148,8 @@ def py_to_sql(entities, relations):
             sql_command.append(
                 f"FOREIGN KEY ({primary_name}) REFERENCES {entity.name}({primary_name}),"
             )
-            post_sql_commands.append(
-                f"ALTER TABLE {entity.name} FOREIGN KEY ({relation_primary_name}) REFERENCES {relation_entity.name}({relation_primary_name});"
+            sql_command.append(
+                f"FOREIGN KEY ({relation_primary_name}) REFERENCES {relation_entity.table_name}({relation_primary_name}),"
             )
 
             sql_command[-1] = sql_command[-1][:-1]
@@ -155,12 +159,15 @@ def py_to_sql(entities, relations):
 
         # break
 
-    for command in sql_commands:
-        for line in command:
-            print(line)
+    with open("init.sql", "w", encoding="utf-8") as file:
+        for command in sql_commands:
+            file.write("\n".join(command) + "\n")
+            for line in command:
+                print(line)
 
-    for line in post_sql_commands:
-        print(line)
+        file.write("\n".join(post_sql_commands))
+        for line in post_sql_commands:
+            print(line)
 
 
 # aus dem SQL die Datenbank erstellen (also Anfragen an das DBMS senden, damit dieses die Datenbank erstellt)
@@ -198,9 +205,11 @@ def json_to_py(json):
     return entities, relations
 
 
-# öffnet die Datei im Lese-Modus
-with open("models/er-model-v4.json", "r", encoding="utf-8") as file:
-    er_model = json.load(file)
-    print(er_model)
-    entities, relations = json_to_py(er_model)
-    py_to_sql(entities, relations)
+if __name__ == "__main__":
+
+    # öffnet die Datei im Lese-Modus
+    with open("models/er-model.json", "r", encoding="utf-8") as file:
+        er_model = json.load(file)
+        print(er_model)
+        entities, relations = json_to_py(er_model)
+        py_to_sql(entities, relations)
