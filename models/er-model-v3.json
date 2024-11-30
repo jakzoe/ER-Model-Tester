@@ -4,8 +4,8 @@
       "name": "student",
       "relations": [
         {
-          "name": "berät",
-          "cardinality": "1"
+          "name": "wohnt",
+          "cardinality": "n"
         }
       ],
       "attributes": [
@@ -24,22 +24,22 @@
       ]
     },
     {
-      "name": "berater",
+      "name": "Zimmer",
       "relations": [
         {
-          "name": "berät",
-          "cardinality": "n"
+          "name": "wohnt",
+          "cardinality": "1"
         }
       ],
       "attributes": [
         {
-          "name": "beraternummer",
+          "name": "Zimmernummer",
           "type": "int",
           "is-primary-key": true,
           "belegung":[1]
         },
         {
-          "name": "telefonnummer",
+          "name": "Gebäude",
           "type": "VARCHAR(50)",
           "is-primary-key": false,
           "belegung":[789]

@@ -4,45 +4,46 @@
       "name": "student",
       "relations": [
         {
-          "name": "berät",
-          "cardinality": "1"
+          "name": "besucht",
+          "cardinality": "n"
         }
       ],
       "attributes": [
         {
           "name": "studentennummer",
           "type": "int",
-          "is-primary-key": true,
-          "belegung":[1,2,3,4]
+          "is-primary-key": true
         },
         {
           "name": "telefonnummer",
           "type": "VARCHAR(50)",
-          "is-primary-key": false,
-          "belegung":[123,234,345,456]
+          "is-primary-key": false
         }
       ]
     },
     {
-      "name": "berater",
+      "name": "kurs",
       "relations": [
         {
-          "name": "berät",
+          "name": "besucht",
           "cardinality": "n"
         }
       ],
       "attributes": [
         {
-          "name": "beraternummer",
+          "name": "kursnr",
           "type": "int",
-          "is-primary-key": true,
-          "belegung":[1]
+          "is-primary-key": true
         },
         {
-          "name": "telefonnummer",
+          "name": "fach",
           "type": "VARCHAR(50)",
-          "is-primary-key": false,
-          "belegung":[789]
+          "is-primary-key": false
+        },
+        {
+          "name": "dozent",
+          "type": "VARCHAR(50)",
+          "is-primary-key": false
         }
       ]
     }
