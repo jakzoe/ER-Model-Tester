@@ -1,0 +1,50 @@
+{
+  "entities": [
+    {
+      "name": "student",
+      "relations": [
+        {
+          "name": "entleiht",
+          "cardinality": "n"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "studentennummer",
+          "type": "int",
+          "is-primary-key": true,
+          "belegung":[1,2,3,4]
+        },
+        {
+          "name": "telefonnummer",
+          "type": "VARCHAR(50)",
+          "is-primary-key": false,
+          "belegung":[123,234,345,456]
+        }
+      ]
+    },
+    {
+      "name": "entliehene_Buecher",
+      "relations": [
+        {
+          "name": "entleit",
+          "cardinality": "1"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "ISBN",
+          "type": "int",
+          "is-primary-key": true,
+          "belegung":[1]
+        },
+        {
+          "name": "Autor",
+          "type": "VARCHAR(50)",
+          "is-primary-key": false,
+          "belegung":[789]
+        }
+      ]
+    }
+  ]
+}
