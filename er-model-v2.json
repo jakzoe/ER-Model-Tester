@@ -1,0 +1,51 @@
+{
+  "entities": [
+    {
+      "name": "student",
+      "relations": [
+        {
+          "name": "besucht",
+          "cardinality": "n"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "studentennummer",
+          "type": "int",
+          "is-primary-key": true
+        },
+        {
+          "name": "telefonnummer",
+          "type": "string",
+          "is-primary-key": false
+        }
+      ]
+    },
+    {
+      "name": "kurs",
+      "relations": [
+        {
+          "name": "besucht",
+          "cardinality": "n"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "kursnr",
+          "type": "int",
+          "is-primary-key": true
+        },
+        {
+          "name": "fach",
+          "type": "string",
+          "is-primary-key": false
+        },
+        {
+          "name": "dozent",
+          "type": "string",
+          "is-primary-key": false
+        }
+      ]
+    }
+  ]
+}
